@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 
+// The BookShelf Component render our bookshelf on the page. There are
+// 3 shelves to be rendered, each one as a 'Shelf' Component.
 function BookShelf(props) {
 	return (
 		<div className="list-books">
@@ -15,6 +17,10 @@ function BookShelf(props) {
 	)
 }
 
+// The 'Shelf' Component renders a shelf on the page. Its properties are a title,
+// a shelf to be inserted on to be chosen among 'currentlyReading',
+// 'wantToRead' and 'read' and an array of books objects.
+// Each book in the shelf will be displayed as an item of an ordered list.
 function Shelf(props) {
   return (
     <div className="bookshelf">
@@ -37,6 +43,8 @@ function Shelf(props) {
   )
 }
 
+// The 'Book' Component has a 'book' property which is one of the object
+// items returned by the API.
 function Book(props) {
   return (
     <div className="book">
