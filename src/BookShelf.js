@@ -52,21 +52,50 @@ function Book(props) {
         <div className="book-cover" style={{
           width: 128, height: 193, backgroundImage: `url(${props.book.imageLinks.smallThumbnail})`
         }}/>
-
         <div className="book-shelf-changer">
-          <select>
-            <option value="none" disabled>Move to...</option>
-            <option value="currentlyReading">Currently Reading</option>
-            <option value="wantToRead">Want to Read</option>
-            <option value="read">Read</option>
-            <option value="none">None</option>
-          </select>
+          <SelectList shelf={props.book.shelf} />
         </div>
       </div>
       <div className="book-title">{props.book.title}</div>
       <div className="book-authors">{props.book.authors[0]}</div>
     </div>
   )
+}
+
+// Define a Class Component for the drop-down list that shows the shelf
+// the current book should be in. The Component has a state that can be
+// changed by the user to move the book it refers to to another shelf.
+class SelectList extends Component {
+  // Pass `props` to the base constructor. As reported in the React Docs,
+  // Class Components should always call the base constructor with `props`.
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: this.props.shelf
+    };
+  }
+
+  // Change the Class Component state if the user chooses a new one.
+  handleChange(event) {
+    this.setState({
+      value: event.target.value
+    });
+  }
+
+  render() {
+    return (
+      // React, instead of using the HTML `selected` attribute, uses
+      // a `value` attribute on the root `select` tag.
+      // Reference 'https://facebook.github.io/react/docs/forms.html'.
+      <select value={this.state.value} onChange={this.handleChange}>
+        <option value="none">Move to...</option>
+        <option value="currentlyReading">Currently Reading</option>
+        <option value="wantToRead">Want to Read</option>
+        <option value="read">Read</option>
+        <option value="none">None</option>
+      </select>
+    )
+  };
 }
 
 export default BookShelf
