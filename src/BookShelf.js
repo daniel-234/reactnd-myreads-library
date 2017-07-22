@@ -17,27 +17,31 @@ function BookShelf(props) {
               		)).map((book) => (
               			console.log(book.title),
 
-              			<li key={book.id}>
-  	                  <div className="book">
-  	                    <div className="book-top">
-  	                      <div className="book-cover" style={{
-                            width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})`
-                          }}/>
+                    <li key={book.id}>
+                      <Book book={book} />
+                    </li>
 
-  	                      <div className="book-shelf-changer">
-  	                        <select>
-  	                          <option value="none" disabled>Move to...</option>
-  	                          <option value="currentlyReading">Currently Reading</option>
-  	                          <option value="wantToRead">Want to Read</option>
-  	                          <option value="read">Read</option>
-  	                          <option value="none">None</option>
-  	                        </select>
-  	                      </div>
-  	                    </div>
-  	                    <div className="book-title">{book.title}</div>
-  	                    <div className="book-authors">{book.authors[0]}</div>
-  	                  </div>
-  	                </li>
+              			// <li key={book.id}>
+  	              //     <div className="book">
+  	              //       <div className="book-top">
+  	              //         <div className="book-cover" style={{
+                 //            width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})`
+                 //          }}/>
+
+  	              //         <div className="book-shelf-changer">
+  	              //           <select>
+  	              //             <option value="none" disabled>Move to...</option>
+  	              //             <option value="currentlyReading" selected="selected">Currently Reading</option>
+  	              //             <option value="wantToRead">Want to Read</option>
+  	              //             <option value="read">Read</option>
+  	              //             <option value="none">None</option>
+  	              //           </select>
+  	              //         </div>
+  	              //       </div>
+  	              //       <div className="book-title">{book.title}</div>
+  	              //       <div className="book-authors">{book.authors[0]}</div>
+  	              //     </div>
+  	              //   </li>
                   )
                 )}
               </ol>
@@ -55,26 +59,32 @@ function BookShelf(props) {
                     console.log(book.title),
 
                     <li key={book.id}>
-                      <div className="book">
-                        <div className="book-top">
-                          <div className="book-cover" style={{
-                            width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})`
-                          }}/>
 
-                          <div className="book-shelf-changer">
-                            <select>
-                              <option value="none" disabled>Move to...</option>
-                              <option value="currentlyReading">Currently Reading</option>
-                              <option value="wantToRead">Want to Read</option>
-                              <option value="read">Read</option>
-                              <option value="none">None</option>
-                            </select>
-                          </div>
-                        </div>
-                        <div className="book-title">{book.title}</div>
-                        <div className="book-authors">{book.authors[0]}</div>
-                      </div>
+                      <Book book={book} />
+
                     </li>
+
+                    // <li key={book.id}>
+                    //   <div className="book">
+                    //     <div className="book-top">
+                    //       <div className="book-cover" style={{
+                    //         width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})`
+                    //       }}/>
+
+                    //       <div className="book-shelf-changer">
+                    //         <select>
+                    //           <option value="none" disabled>Move to...</option>
+                    //           <option value="currentlyReading">Currently Reading</option>
+                    //           <option value="wantToRead">Want to Read</option>
+                    //           <option value="read">Read</option>
+                    //           <option value="none">None</option>
+                    //         </select>
+                    //       </div>
+                    //     </div>
+                    //     <div className="book-title">{book.title}</div>
+                    //     <div className="book-authors">{book.authors[0]}</div>
+                    //   </div>
+                    // </li>
                   )
                 )}
               </ol>
@@ -91,26 +101,32 @@ function BookShelf(props) {
                     console.log(book.title),
 
                     <li key={book.id}>
-                      <div className="book">
-                        <div className="book-top">
-                          <div className="book-cover" style={{
-                            width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})`
-                          }}/>
 
-                          <div className="book-shelf-changer">
-                            <select>
-                              <option value="none" disabled>Move to...</option>
-                              <option value="currentlyReading">Currently Reading</option>
-                              <option value="wantToRead">Want to Read</option>
-                              <option value="read">Read</option>
-                              <option value="none">None</option>
-                            </select>
-                          </div>
-                        </div>
-                        <div className="book-title">{book.title}</div>
-                        <div className="book-authors">{book.authors[0]}</div>
-                      </div>
+                      <Book book={book} />
+
                     </li>
+
+                    // <li key={book.id}>
+                    //   <div className="book">
+                    //     <div className="book-top">
+                    //       <div className="book-cover" style={{
+                    //         width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})`
+                    //       }}/>
+
+                    //       <div className="book-shelf-changer">
+                    //         <select>
+                    //           <option value="none" disabled>Move to...</option>
+                    //           <option value="currentlyReading">Currently Reading</option>
+                    //           <option value="wantToRead">Want to Read</option>
+                    //           <option value="read">Read</option>
+                    //           <option value="none">None</option>
+                    //         </select>
+                    //       </div>
+                    //     </div>
+                    //     <div className="book-title">{book.title}</div>
+                    //     <div className="book-authors">{book.authors[0]}</div>
+                    //   </div>
+                    // </li>
                   )
                 )}
               </ol>
@@ -120,6 +136,30 @@ function BookShelf(props) {
         </div>
       </div>
 	)
+}
+
+function Book(props) {
+  return (
+    <div className="book">
+      <div className="book-top">
+        <div className="book-cover" style={{
+          width: 128, height: 193, backgroundImage: `url(${props.book.imageLinks.smallThumbnail})`
+        }}/>
+
+        <div className="book-shelf-changer">
+          <select>
+            <option value="none" disabled>Move to...</option>
+            <option value="currentlyReading">Currently Reading</option>
+            <option value="wantToRead">Want to Read</option>
+            <option value="read">Read</option>
+            <option value="none">None</option>
+          </select>
+        </div>
+      </div>
+      <div className="book-title">{props.book.title}</div>
+      <div className="book-authors">{props.book.authors[0]}</div>
+    </div>
+  )
 }
 
 export default BookShelf
