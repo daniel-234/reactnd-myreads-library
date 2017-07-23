@@ -12,7 +12,17 @@ class BooksApp extends React.Component {
      * pages, as well as provide a good URL they can bookmark and share.
      */
     showSearchPage: true,
-    books: []
+    books: [],
+    checks: []
+  }
+
+  moveToAnotherShelf = (event, book) => {
+    console.log(event.target.value);
+    console.log(book.title);
+
+    this.setState((state) => ({
+      checks: this.state.books.map((b) => (b.title === book.title? console.log('Y, clicked:', b.title) : console.log('N')))
+    }));
   }
 
   componentDidMount() {
@@ -48,7 +58,7 @@ class BooksApp extends React.Component {
           </div>
         ) : (
           <div>
-            <BookShelf books={this.state.books} />
+            <BookShelf books={this.state.books} onMoveABook={this.moveToAnotherShelf} />
             <div className="open-search">
               <a onClick={() => this.setState({ showSearchPage: true })}>Add a book</a>
             </div>
