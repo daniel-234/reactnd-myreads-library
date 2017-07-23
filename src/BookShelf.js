@@ -7,10 +7,13 @@ class BookShelf extends Component {
     super(props);
   }
 
-  handleShelf = (event, book) => {
-    // console.log(event.target.value);
-    this.props.onMoveABook(event, book);
+  handleShelf = (v, book) => {
+
+    this.props.onMoveABook(v, book);
+
+    // These two work
     // console.log(book.title);
+    // console.log(event.target.value);
   }
 
   render() {
@@ -38,10 +41,13 @@ class Shelf extends Component {
     super(props);
   }
 
-  handleBooks = (event, book) => {
+  handleBooks = (v, book) => {
+    // These two work
     // console.log(event.target.value);
     // console.log(book.title);
-    this.props.onMoveBooks(event, book);
+
+
+    this.props.onMoveBooks(v, book);
   }
 
   render() {
@@ -90,9 +96,11 @@ class Book extends Component {
   // }
 
 
-  changeShelf = (event, book) => {
+  changeShelf = (v, book) => {
+    // These two work
     // console.log(book.title);
-    this.props.onMove(event, book);
+    // console.log(event.target.value);
+    this.props.onMove(v, book);
   }
 
 
@@ -136,8 +144,11 @@ class SelectList extends Component {
 
   // Change the Class Component state if the user chooses a new one.
   handleChange(event) {
-    this.props.onChangeShelf(event, this.props.book);
+    this.props.onChangeShelf(event.target.value, this.props.book);
+
+    // These two work
     // console.log(this.props.book.title);
+    // console.log(event.target.value);
   }
 
   render() {

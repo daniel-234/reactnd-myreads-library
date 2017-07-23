@@ -13,17 +13,39 @@ class BooksApp extends React.Component {
      */
     showSearchPage: true,
     books: [],
-    checks: []
+    items: []
   }
 
-  moveToAnotherShelf = (event, book) => {
-    console.log(event.target.value);
+  moveToAnotherShelf = (v, book) => {
+    console.log(v);
     console.log(book.title);
 
     this.setState((state) => ({
-      checks: this.state.books.map((b) => (b.title === book.title? console.log('Y, clicked:', b.title) : console.log('N')))
-    }));
+      books: state.books.map(function(b) {
+        if (b.title === book.title) {
+          b.shelf = v;
+          return b;
+        } else {
+          return b;
+        }
+      })
+    }))
+
+    // books: this.state.books.map((b) => (
+    //   b.title
+
+      // console.log(b.title),
+      // b.title === book.title ? {b.shelf = event.target.value; return b} : {return b}
+
+      // return b.shelf
+      // console.log(b.title),
+      // console.log(this.state.items)
+    // ))
+
+    // this.setState({ books: books })
   }
+
+  // console.log('Y, clicked:', b.title) : console.log('N')))
 
   componentDidMount() {
     BooksAPI.getAll().then((books) => {
