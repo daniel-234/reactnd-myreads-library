@@ -4,10 +4,6 @@ import { Link } from 'react-router-dom'
 // The BookShelf Component renders our bookshelf on the page. There are
 // 3 shelves to be rendered, each one as a 'Shelf' Component.
 class BookShelf extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   // Call the `onMoveBook` in its props.
   handleShelf = (s, book) => {
     this.props.onMoveABook(s, book);
@@ -40,10 +36,6 @@ class BookShelf extends Component {
 // and 'read' and an array of books objects.
 // Each book in the shelf will be displayed as an item of an ordered list.
 class Shelf extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   // Call the `onMoveBooks` function in its props.
   handleBooks = (s, book) => {
     this.props.onMoveBooks(s, book);
