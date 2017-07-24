@@ -1,6 +1,7 @@
 import React from 'react'
 import BookShelf from './BookShelf'
 import SearchBook from './SearchBook'
+import { Route } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
 
@@ -12,7 +13,8 @@ class BooksApp extends React.Component {
      * users can use the browser's back and forward buttons to navigate between
      * pages, as well as provide a good URL they can bookmark and share.
      */
-    showSearchPage: true,
+    // showSearchPage: true,
+
     books: []
   }
 
@@ -41,9 +43,9 @@ class BooksApp extends React.Component {
   }
 
   // Change state to show shelf page.
-  showBookShelf = () => (
-    this.setState({ showSearchPage: false })
-  )
+  // showBookShelves = () => (
+  //   this.setState({ showSearchPage: false })
+  // )
 
   // Lifecycle Event that fetches the data from the API.
   componentDidMount() {
@@ -53,21 +55,39 @@ class BooksApp extends React.Component {
     })
   }
 
+  // onNavigate = () => (
+  //   this.setState({ showSearchPage: true })
+  // )
+
   // Render screen based on state.
   render() {
     return (
       <div className="app">
-        {this.state.showSearchPage ? (
-          <SearchBook backToBooks={this.showBookShelf} />
-        ) : (
+
+        <Route exact path="/" render={() => (
           <div>
             <BookShelf books={this.state.books} onMoveABook={this.moveToAnotherShelf} />
-            <div className="open-search">
-              <a onClick={() => this.setState({ showSearchPage: true })}>Add a book</a>
-            </div>
+
           </div>
-        )}
+        )} />
+        <Route path="/add" component={SearchBook} />
       </div>
+
+        // {this.state.showSearchPage ? (
+        //   <SearchBook backToBooks={this.showBookShelves} />
+        // ) : (
+          // <div>
+          //   <BookShelf books={this.state.books} onMoveABook={this.moveToAnotherShelf} />
+          //   <div className="open-search">
+          //     <Link
+          //       to="/add"
+          //       // onClick={() => this.setState({ showSearchPage: true })}
+          //       className="add-book"
+          //     >Add a book</Link>
+          //   </div>
+          // </div>
+        // )}
+      // </div>
     )
   }
 }

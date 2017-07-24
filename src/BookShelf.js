@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 // The BookShelf Component renders our bookshelf on the page. There are
 // 3 shelves to be rendered, each one as a 'Shelf' Component.
@@ -22,6 +23,13 @@ class BookShelf extends Component {
           <Shelf title="Currently Reading" shelf="currentlyReading" books={this.props.books} onMoveBooks={this.handleShelf} />
           <Shelf title="Want To Read" shelf="wantToRead" books={this.props.books} onMoveBooks={this.handleShelf} />
           <Shelf title="Read" shelf="read" books={this.props.books} onMoveBooks={this.handleShelf} />
+        </div>
+        <div className="open-search">
+          <Link
+            to="/add"
+            // onClick={() => this.setState({ showSearchPage: true })}
+            className="add-book"
+          >Add a book</Link>
         </div>
       </div>
     )
