@@ -13,7 +13,6 @@ class SearchBook extends Component {
           <Link
           	to="/"
           	className="close-search"
-          	// onClick={this.props.backToBooks}>Close</a>
           >Close</Link>
           <div className="search-books-input-wrapper">
             {/*

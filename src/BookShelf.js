@@ -27,7 +27,6 @@ class BookShelf extends Component {
         <div className="open-search">
           <Link
             to="/add"
-            // onClick={() => this.setState({ showSearchPage: true })}
             className="add-book"
           >Add a book</Link>
         </div>
@@ -59,7 +58,6 @@ class Shelf extends Component {
             {this.props.books.filter((book) => (
               book.shelf === this.props.shelf
               )).map((book) => (
-                // console.log(book.title),
                 <li key={book.id}>
                   <Book book={book} onMove={this.handleBooks} />
                 </li>
