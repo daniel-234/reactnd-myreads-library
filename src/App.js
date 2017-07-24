@@ -12,41 +12,34 @@ class BooksApp extends React.Component {
      * pages, as well as provide a good URL they can bookmark and share.
      */
     showSearchPage: true,
-    books: [],
-    items: []
+    books: []
   }
 
-  moveToAnotherShelf = (v, book) => {
-    console.log(v);
-    console.log(book.title);
+  // Move the given book to shelf s when invoked by a user action
+  // on the `select` button in given book.
+  moveToAnotherShelf = (s, book) => {
+    // console.log(s);
+    // console.log(book.title);
 
+    // Change the books property of the App state to reflect the change of
+    // a shelf where book is in. This will trigger a re-render of the Component.
     this.setState((state) => ({
       books: state.books.map(function(b) {
+        // Check if the title of the given book is equal to the one passed
+        // as argument to the function.
         if (b.title === book.title) {
-          b.shelf = v;
+          // Change the book shelf property and return the book.
+          b.shelf = s;
           return b;
         } else {
+          // Do nothing otherwise.
           return b;
         }
       })
     }))
-
-    // books: this.state.books.map((b) => (
-    //   b.title
-
-      // console.log(b.title),
-      // b.title === book.title ? {b.shelf = event.target.value; return b} : {return b}
-
-      // return b.shelf
-      // console.log(b.title),
-      // console.log(this.state.items)
-    // ))
-
-    // this.setState({ books: books })
   }
 
-  // console.log('Y, clicked:', b.title) : console.log('N')))
-
+  // Lifecycle Event that fetches the data from the API.
   componentDidMount() {
     BooksAPI.getAll().then((books) => {
       console.log(books);

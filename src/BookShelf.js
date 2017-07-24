@@ -1,19 +1,15 @@
 import React, { Component } from 'react'
 
-// The BookShelf Component render our bookshelf on the page. There are
+// The BookShelf Component renders our bookshelf on the page. There are
 // 3 shelves to be rendered, each one as a 'Shelf' Component.
 class BookShelf extends Component {
   constructor(props) {
     super(props);
   }
 
-  handleShelf = (v, book) => {
-
-    this.props.onMoveABook(v, book);
-
-    // These two work
-    // console.log(book.title);
-    // console.log(event.target.value);
+  // Call the `onMoveBook` in its props.
+  handleShelf = (s, book) => {
+    this.props.onMoveABook(s, book);
   }
 
   render() {
@@ -33,21 +29,17 @@ class BookShelf extends Component {
 }
 
 // The 'Shelf' Component renders a shelf on the page. Its properties are a title,
-// a shelf to be inserted on to be chosen among 'currentlyReading',
-// 'wantToRead' and 'read' and an array of books objects.
+// a shelf to be inserted on to be chosen among 'currentlyReading', 'wantToRead'
+// and 'read' and an array of books objects.
 // Each book in the shelf will be displayed as an item of an ordered list.
 class Shelf extends Component {
   constructor(props) {
     super(props);
   }
 
-  handleBooks = (v, book) => {
-    // These two work
-    // console.log(event.target.value);
-    // console.log(book.title);
-
-
-    this.props.onMoveBooks(v, book);
+  // Call the `onMoveBooks` function in its props.
+  handleBooks = (s, book) => {
+    this.props.onMoveBooks(s, book);
   }
 
   render() {
@@ -59,8 +51,7 @@ class Shelf extends Component {
             {this.props.books.filter((book) => (
               book.shelf === this.props.shelf
               )).map((book) => (
-                console.log(book.title),
-
+                // console.log(book.title),
                 <li key={book.id}>
                   <Book book={book} onMove={this.handleBooks} />
                 </li>
@@ -83,26 +74,10 @@ class Book extends Component {
     };
   }
 
-  // changeShelf = (() => {
-  //   this.setState(() => ({
-  //     console.log('Ciao')
-  //   }))
-  // })
-
-  // handleChange(event) {
-  //   this.setState({
-  //     value: event.target.value
-  //   });
-  // }
-
-
-  changeShelf = (v, book) => {
-    // These two work
-    // console.log(book.title);
-    // console.log(event.target.value);
-    this.props.onMove(v, book);
+  // Call the `onMove` function in its props.
+  changeShelf = (s, book) => {
+    this.props.onMove(s, book);
   }
-
 
   render() {
     return (
@@ -124,31 +99,23 @@ class Book extends Component {
 }
 
 // Define a Controlled Component for the drop-down list that shows the shelf
-// the current book should be in. The Component has a state that can be
-// changed by the user to move the book it refers to to another shelf.
+// the current book should be in.
 class SelectList extends Component {
   // Pass `props` to the base constructor. As reported in the React Docs,
   // Class Components should always call the base constructor with `props`.
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     value: this.props.shelf
-  //   };
-  // }
-
   constructor(props) {
     super(props);
 
+    // This binding is necessary to make `this` work in the callback (see
+    // React Docs).
     this.handleChange = this.handleChange.bind(this);
   }
 
   // Change the Class Component state if the user chooses a new one.
+  // Call the `onChangeShelf` function in props, passing the value of
+  // the event target and the current book as arguments.
   handleChange(event) {
     this.props.onChangeShelf(event.target.value, this.props.book);
-
-    // These two work
-    // console.log(this.props.book.title);
-    // console.log(event.target.value);
   }
 
   render() {
@@ -168,9 +135,3 @@ class SelectList extends Component {
 }
 
 export default BookShelf
-
-
-// <select value={this.state.value} onChange={() => this.props.onChangeShelf(event.target.value)} >
-
-
-// <select value={this.props.shelf} onChange={() =>this.props.onChangeShelf(event.target.value)} >
