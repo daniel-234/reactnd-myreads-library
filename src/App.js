@@ -31,6 +31,12 @@ class BooksApp extends React.Component {
     }))
   }
 
+  searchBook(book) {
+    BooksAPI.search(book).then((books) => {
+      console.log(books);
+    })
+  }
+
   // Lifecycle Event that fetches the data from the API.
   componentDidMount() {
     BooksAPI.getAll().then((books) => {
@@ -48,7 +54,13 @@ class BooksApp extends React.Component {
             <BookShelf books={this.state.books} onMoveABook={this.moveToAnotherShelf} />
           </div>
         )} />
-        <Route path="/add" component={SearchBook} />
+        <Route path="/add" render={() => (
+          <SearchBook
+            onSearchAPI={(book) => {
+              this.searchBook(book);
+            }}
+          />
+        )} />
       </div>
     )
   }
