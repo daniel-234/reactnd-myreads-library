@@ -93,7 +93,6 @@ class Book extends Component {
       </div>
     )
   }
-
 }
 
 // Define a Controlled Component for the drop-down list that shows the shelf
