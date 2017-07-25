@@ -33,9 +33,29 @@ class BooksApp extends React.Component {
   }
 
   searchBook(searchedBooks) {
-    BooksAPI.search(searchedBooks).then((books) => {
-      console.log(books);
-      this.setState({ searchedBooks: books })
+    BooksAPI.search(searchedBooks).then((results) => {
+      console.log(results);
+      //  const result;
+      if (results.length > 0) {
+        const r = results.filter((b) => (
+          b.imageLinks !== undefined
+        ))
+        console.log(r);
+        this.setState({ searchedBooks: r })
+      } else {
+        this.setState({ searchedBooks: [] })
+      }
+
+      // this.setState(() => (
+      //   state.searchedBooks: books.filter(function(b) {
+      //     if (b.imageLinks !== undefined) {
+      //       return b;
+      //     } else {
+      //       return
+      //     }
+      //   }
+      //   )
+      // ))
     })
   }
 
@@ -63,7 +83,7 @@ class BooksApp extends React.Component {
           <SearchBook
             searchedBooks={this.state.searchedBooks}
             onSearchAPI={(book) => {
-              this.searchBook(book);
+              this.searchBook(book)
             }}
           />
         )} />

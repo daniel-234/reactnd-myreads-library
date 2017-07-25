@@ -27,7 +27,7 @@ class Book extends Component {
           </div>
         </div>
         <div className="book-title">{this.state.value.book.title}</div>
-        <div className="book-authors">{this.state.value.book.authors[0]}</div>
+
       </div>
     )
   }

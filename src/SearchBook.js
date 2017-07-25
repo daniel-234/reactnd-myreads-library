@@ -47,15 +47,12 @@ class SearchBook extends Component {
           </form>
         </div>
         <div className="search-books-results">
-          <ol className="books-grid"></ol>
-
           <ol className="books-grid">
-            {this.props.searchedBooks.map((book) => (
+          	{this.props.searchedBooks.length > 0 && this.props.searchedBooks.map((book) => (
               <li key={book.id}>
                 <Book book={book} onMove={this.handleBooks} />
               </li>
-              )
-            )}
+            ))}
           </ol>
 
         </div>
