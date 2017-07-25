@@ -45,23 +45,6 @@ class BooksApp extends React.Component {
 
         this.setState((state) => ({
           searchedBooks: r.map(function(res) {
-            // for (var i = 0; i < state.books.length; i++) {
-
-
-            // console.log(res.shelf);
-            // state.books.map(function(b) {
-            //   if (b.title !== res.title) {
-            //     // console.log(res.title);
-            //     // console.log(res.shelf);
-            //     console.log(res.id);
-            //     // return b;
-            //     // res.shelf = 'none'
-            //   // } else {
-            //   //   res.shelf = 'none';
-            //   //   return res;
-            //   }
-
-            // })
 
             res.shelf = 'none';
 
@@ -72,52 +55,13 @@ class BooksApp extends React.Component {
               }
             })
 
-            // for (var i = 0; i < state.books.length; i++) {
-
-            //   if (res.title === state.books[i].title) {
-            //     console.log(res.title);
-            //     res.shelf = state.books[i].shelf;
-            //   }
-            // }
-
-
-
-              // console.log(state.books[i].title.length);
-              // console.log(res.title.length);
-              // console.log(res.title);
-
-              // if (res['title'] === state.books[i]['title']) {
-                // console.log(state.books[i].title);
-                // res.shelf = state.books[i].shelf;
-                // return res;
-              // } else {
-              //   res.shelf = 'none';
-              //   return res;
-            //   }
-            //   return res;
-            // }
-            // console.log(res.shelf);
             return res;
 
           })
         }))
-      // }
-        // })
-
       } else {
         this.setState({ searchedBooks: [] })
       }
-
-      // this.setState(() => (
-      //   state.searchedBooks: books.filter(function(b) {
-      //     if (b.imageLinks !== undefined) {
-      //       return b;
-      //     } else {
-      //       return
-      //     }
-      //   }
-      //   )
-      // ))
     })
   }
 
