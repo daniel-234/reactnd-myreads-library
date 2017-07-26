@@ -33,12 +33,49 @@ class BooksApp extends React.Component {
   }
 
   searchBook(searchedBooks) {
-    BooksAPI.search(searchedBooks).then((results) => {
+    BooksAPI.search(searchedBooks, 20).then((results) => {
       console.log(results);
-      //  const result;
+       // const result;
       if (results.length > 0) {
-        const r = results.filter((b) => (
+        // const dropDuplicates = [];
+        // for (var i = 1; i < results.length; i++) {
+        //   dropDuplicates.push(results[0]);
+        //   for (var j = 0; j < dropDuplicates.length; j++) {
+        //     if(results[i].title !== dropDuplicates[j].title && results[i].id !== dropDuplicates[j].id) {
+        //       dropDuplicates.push(results[i]);
+        //     }
+        //   }
+
+        // }
+
+
+        const uniqueArray = [];
+        const titlesArray = [];
+
+        for (let i = 0; i < results.length; i++) {
+          let bookTitle = results[i].title;
+          if (titlesArray.indexOf(bookTitle) == -1) {
+            titlesArray.push(bookTitle);
+            uniqueArray.push(results[i]);
+          }
+        }
+        // var uniqueA = [];
+        // uniqueA.push(results[0]);
+
+        // for (var i = 0; i < results[i].)
+
+        // const uniqueArray = results.filter(function(elem, pos) {
+        //   return results.indexOf(elem.id) == pos;
+        // });
+
+        console.log(uniqueArray);
+        console.log(titlesArray);
+
+
+        const r = uniqueArray.filter((b) => (
           b.imageLinks !== undefined
+
+
         ))
         console.log(r);
         // this.setState({ searchedBooks: r })
@@ -53,6 +90,8 @@ class BooksApp extends React.Component {
                 console.log(res.title);
                 res.shelf = b.shelf;
               }
+
+              return res;
             })
 
             return res;
