@@ -5,7 +5,9 @@ import { Link } from 'react-router-dom'
 class SearchBook extends Component {
 	constructor(props) {
 		super(props);
-		this.state = {value: ''};
+		this.state = {
+			value: ''
+		};
 
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
@@ -24,6 +26,12 @@ class SearchBook extends Component {
 		this.setState({value: event.target.value});
 	}
 
+	// Call the `deleteScreen` props to empty the array that stores the results
+	// from the API call after the user made a query.
+	emptyScreen() {
+		this.props.deleteScreen();
+	}
+
 	render() {
 		return (
 			<div className="search-books">
@@ -31,6 +39,7 @@ class SearchBook extends Component {
           <Link
           	to="/"
           	className="close-search"
+          	onClick={this.emptyScreen}
           >Close</Link>
           <form onSubmit={this.handleSubmit} className="search-book-form">
           	<div className="search-books-input-wrapper">

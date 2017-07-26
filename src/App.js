@@ -7,7 +7,9 @@ import './App.css'
 
 class BooksApp extends React.Component {
   state = {
+    // Array to store the books in our library.
     books: [],
+    // Array to store the books retrieved from the API query by a user.
     searchedBooks: []
   }
 
@@ -90,6 +92,13 @@ class BooksApp extends React.Component {
     })
   }
 
+  // Empty the query results.
+  emptyQueryArray() {
+    this.setState({
+      searchedBooks: []
+    })
+  }
+
   // Lifecycle Event that fetches the data from the API.
   componentDidMount() {
     BooksAPI.getAll().then((books) => {
@@ -116,6 +125,7 @@ class BooksApp extends React.Component {
             onSearchAPI={(book) => {
               this.searchBook(book)
             }}
+            deleteScreen={this.emptyQueryArray}
           />
         )} />
       </div>
