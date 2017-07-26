@@ -60,7 +60,8 @@ class BooksApp extends React.Component {
 
         // Check that the book object has an image to display.
         const booksList = uniqueArray.filter((b) => (
-          b.imageLinks !== undefined
+          b.imageLinks !== undefined &&
+          b.authors !== undefined
         ))
 
         // Update the search screen state.

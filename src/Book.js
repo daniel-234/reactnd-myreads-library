@@ -27,7 +27,14 @@ class Book extends Component {
           </div>
         </div>
         <div className="book-title">{this.state.value.book.title}</div>
-
+        <div className="book-authors">
+          {/* Loop over the authors array and display each of its elements as a separate div. */}
+          {this.state.value.book.authors.map((a) => (
+            <div key={a}>
+              {a}
+            </div>
+          ))}
+        </div>
       </div>
     )
   }
