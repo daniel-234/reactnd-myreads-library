@@ -11,11 +11,13 @@ class SearchBook extends Component {
 
 		this.handleChange = this.handleChange.bind(this);
 		this.handleSubmit = this.handleSubmit.bind(this);
+		this.handleBooks = this.handleBooks.bind(this);
 	}
 
 	handleSubmit(event) {
 		event.preventDefault();
 		console.log(this.state.value);
+		console.log(this.props);
 
 		if (this.props.onSearchAPI) {
 			this.props.onSearchAPI(this.state.value);
@@ -31,6 +33,16 @@ class SearchBook extends Component {
 	emptyScreen() {
 		this.props.deleteScreen();
 	}
+
+	// Call the `onMoveBooks` function in its props.
+  handleBooks(s, book) {
+    this.props.onMoveToShelf(s, book);
+    // console.log(s);
+    // console.log(book);
+    // console.log(this.searchedBooks);
+    // this.props.params.searchedBooks.push(book);
+    // console.log(this.props.params);
+  }
 
 	render() {
 		return (

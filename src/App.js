@@ -16,6 +16,7 @@ class BooksApp extends React.Component {
   // Move the given book to shelf s when invoked by a user action
   // on the `select` button in given book.
   moveToAnotherShelf = (s, book) => {
+    console.log(this.state);
     // Change the books property of the App state to reflect the change of
     // a shelf where book is in. This will trigger a re-render of the Component.
     this.setState((state) => ({
@@ -32,6 +33,40 @@ class BooksApp extends React.Component {
         }
       })
     }))
+  }
+
+  insertInLibrary(shelf, queryBook) {
+    console.log(shelf);
+    console.log(queryBook);
+    // Control variable set to false if the book is not yet in the
+    // library (default value); true otherwise.
+    let inLibrary = false;
+    // Loop over the books array.
+    this.state.books.map((b) => (
+      // Change the value of the sentinel variable if the library is
+      // already stored in the library.
+      (b.title === queryBook.title) ?
+        inLibrary = true : inLibrary
+    ))
+
+    // Check if the book is not yet in the library.
+    if (inLibrary == false) {
+      console.log(queryBook);
+      // Update the API and insert `queryBook` in the library.
+      BooksAPI.update(queryBook, shelf).then(
+        // Pass the Promise a request to the API to get the updated books collection.
+        BooksAPI.getAll().then((books) => {
+          console.log(books);
+          // Give the state books array the result returned by the API.
+          this.setState({ books });
+        })
+      )
+      console.log(this.state.books);
+    }
+
+    console.log(this.state);
+
+    console.log(inLibrary);
   }
 
   // Display the search results returned from the query by the user.
@@ -90,7 +125,11 @@ class BooksApp extends React.Component {
       } else {
         this.setState({ searchedBooks: [] })
       }
+
+      console.log(this.state)
     })
+
+
   }
 
   // Empty the query results.
@@ -120,13 +159,24 @@ class BooksApp extends React.Component {
             />
           </div>
         )} />
-        <Route path="/add" render={() => (
+        <Route path="/add" render={({ history }) => (
           <SearchBook
             searchedBooks={this.state.searchedBooks}
             onSearchAPI={(book) => {
               this.searchBook(book)
+              console.log(this.state)
+              // history.push('/')
             }}
             deleteScreen={this.emptyQueryArray}
+            onMoveToShelf={(s, b) => {
+              this.insertInLibrary(s, b)
+              history.push('/')
+              // console.log(this.state)
+            }
+
+              // history.push('/'),
+              // console.log(history.location.state)
+            }
           />
         )} />
       </div>
