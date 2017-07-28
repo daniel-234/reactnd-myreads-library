@@ -211,11 +211,11 @@ class BooksApp extends React.Component {
   }
 
   // Empty the query results.
-  emptyQueryArray() {
-    this.setState({
-      searchedBooks: []
-    })
-  }
+  // emptyQueryArray() {
+  //   this.setState({
+  //     searchedBooks: []
+  //   })
+  // }
 
   // Lifecycle Event that fetches the data from the API.
   componentDidMount() {
@@ -245,7 +245,7 @@ class BooksApp extends React.Component {
               console.log(this.state)
               // history.push('/')
             }}
-            deleteScreen={this.emptyQueryArray}
+            // deleteScreen={this.emptyQueryArray}
             onMoveToShelf={(s, b) => {
               this.insertInLibrary(s, b)
               history.push('/')

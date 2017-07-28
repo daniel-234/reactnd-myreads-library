@@ -71,8 +71,9 @@ class SearchBook extends Component {
 
 	// Call the `deleteScreen` props to empty the array that stores the results
 	// from the API call after the user made a query.
-	emptyScreen() {
-		this.props.deleteScreen();
+	clearQuery = () => {
+		// this.props.deleteScreen();
+		this.setState({ query: '' });
 	}
 
 	// Call the `onMoveBooks` function in its props.
