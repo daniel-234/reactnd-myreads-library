@@ -1,35 +1,19 @@
-This is the starter template for the final assessment project for Udacity's React Fundamentals course, developed by [React Training](https://reacttraining.com). The goal of this template is to save you time by providing a static example of the CSS and HTML markup that may be used, but without any of the React code that is needed to complete the project. If you choose to start with this template, your job will be to add interactivity to the app by refactoring the static code in this template.
+# MyReads: A Book Lending App
 
-Of course, you are free to start this project from scratch if you wish! Just be sure to use [Create React App](https://github.com/facebookincubator/create-react-app) to bootstrap the project.
+In this application, the main page displays a list of "shelves" (i.e. categories), each of which contains a number of books.
+The three shelves are:
+* Currently Reading
+* Want to Read
+* Read
 
-## What You're Getting
-```
-+--public/
- |-- index.html - DO NOT MODIFY
- |-- favicon.ico - React Icon, You may change if you wish.
-+-- src/
- +-- icons/ - Helpful images for your app. Use at your discretion.
-  |-- add.svg
-  |-- arrow-back.svg
-  |-- arrow-drop-down.svg
- |-- App.js - This is the root of your app. Contains static HTML right now.
- |-- App.css - Styles for your app. Feel free to customize this as you desire.
- |-- App.test.js - Used for testing. Provided with Create React App.
- Testing is encouraged, but not required.
- |-- BooksAPI.js - A JavaScript API for the provided Udacity backend.
- Instructions for the methods are below.
- |-- index.js - You should not need to modify this file. It is used for DOM rendering only.
- |-- index.css - Global styles. You probably won't need to change anything here.
-|-- .gitignore
-|-- CONTRIBUTING.MD - Information about contributing to this repo.
-TL;DR - Fork and clone your own version of this to use it.
-|-- README.MD - This README file.
-|-- SEARCH_TERMS.md - The whitelisted short collection of available search terms
-for you to use with your app.
-|-- package.json - npm package manager file. It's unlikely that you'll need to modify this.
-```
+Each book has a control that lets a user select the shelf for that book. A book will move to a different shelf if a user selects it from its control.
+The main page also has a link to search new books. Books are retrieved from a backend server based on the user text input query and displayed on the page. A book can be added to the library by selecting the shelf it should move to from its control.
+The backend server only accept a particular set of search terms, that can be found in [SEARCH_TERMS.md](SEARCH_TERMS.md).
 
-Remember that good React design practice is to create new JS files for each component and use import/require statements to include them where they are needed.
+## Getting started
+
+To launch the application (clone this repo and) download it locally, then install it with the command ```npm install``` and launch it with ```npm launch```.
+The Front-End server on your local machine should be accessible on `localhost: 3000`.
 
 ## Backend Server
 
