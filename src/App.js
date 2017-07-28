@@ -26,6 +26,9 @@ class BooksApp extends React.Component {
         if (b.title === book.title) {
           // Change the book shelf property and return the book.
           b.shelf = s;
+          // Update our library assigning the new shelf property to the
+          // given book, so changes would persist between sessions.
+          BooksAPI.update(book, s);
           return b;
         } else {
           // Do nothing otherwise.
