@@ -10,9 +10,22 @@ class SearchBook extends Component {
 		};
 
 		this.handleChange = this.handleChange.bind(this);
-		this.handleSubmit = this.handleSubmit.bind(this);
+		// this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleBooks = this.handleBooks.bind(this);
 	}
+
+
+	updateQuery = (query) => {
+		console.log(query);
+		this.setState({
+			query: query.trim()
+		});
+
+		console.log(this.state.query);
+
+	}
+
+
 
 	handleSubmit(event) {
 		event.preventDefault();
@@ -24,14 +37,36 @@ class SearchBook extends Component {
 			// This method makes strings like 'King  ' or '  King  '
 			// be the same as 'King', that is the exact value the
 			// API wants to return a result for the query 'King'.
-			this.props.onSearchAPI(this.state.query.trim());
+			this.props.onSearchAPI(this.state.query);
 		}
 	}
 
-	handleChange(event) {
+
+
+	handleChange = (query) => {
+		console.log(query);
+		console.log(this.state.query);
+
 		this.setState({
-			query: event.target.value
+			query: query
 		});
+
+		// this.updateQuery(query);
+		console.log(this.state.query);
+
+
+
+		// if (this.state.query) {
+			console.log(this.state.query);
+			if (this.props.onSearchAPI) {
+			// Trim off any extra spaces around the query string.
+			// This method makes strings like 'King  ' or '  King  '
+			// be the same as 'King', that is the exact value the
+			// API wants to return a result for the query 'King'.
+			this.props.onSearchAPI(query.trim());
+		} else {
+			console.log('B');
+		}
 	}
 
 	// Call the `deleteScreen` props to empty the array that stores the results
@@ -59,7 +94,7 @@ class SearchBook extends Component {
           	className="close-search"
           	onClick={this.emptyScreen}
           >Close</Link>
-          <form onSubmit={this.handleSubmit} className="search-book-form">
+
           	<div className="search-books-input-wrapper">
 	            {/*
 	              NOTES: The search from BooksAPI is limited to a particular set of search terms.
@@ -71,12 +106,12 @@ class SearchBook extends Component {
 	            */}
 	            <input
 	            	className="search-books-input"
-	            	type="text" value={this.state.query}
+	            	type="text"
 	            	placeholder="Search by title or author"
 	            	value={this.state.query}
-	            	onChange={this.handleChange} />
+	            	onChange={(event) => this.handleChange(event.target.value)} />
 	           </div>
-          </form>
+
         </div>
         <div className="search-books-results">
           <ol className="books-grid">

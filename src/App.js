@@ -74,8 +74,13 @@ class BooksApp extends React.Component {
 
   // Display the search results returned from the query by the user.
   searchBook(searchedBooks) {
-    BooksAPI.search(searchedBooks, 20).then((results) => {
+    console.log(searchedBooks);
+
+    if (searchedBooks) {
+      console.log('done');
+      BooksAPI.search(searchedBooks, 20).then((results) => {
       console.log(results);
+      console.log('A');
 
       // Check if the query is not empty.
       if (results.length > 0) {
@@ -131,6 +136,76 @@ class BooksApp extends React.Component {
 
       console.log(this.state)
     })
+    } else {
+      console.log('no');
+      this.setState({ searchedBooks: [] })
+    }
+
+
+
+
+
+    // BooksAPI.search(searchedBooks, 20).then((results) => {
+    //   console.log(results);
+    //   console.log('A');
+
+    //   // Check if the query is not empty.
+    //   if (results.length > 0) {
+    //     // Array to get rid of duplicate items from the query.
+    //     const uniqueArray = [];
+    //     // Array to store the titles of the unique items.
+    //     const titlesArray = [];
+    //     // Loop through the array resulting from querying the API.
+    //     for (let i = 0; i < results.length; i++) {
+    //       // Store the current book title.
+    //       let bookTitle = results[i].title;
+    //       // Check if the same title is not yet stored in the titles array.
+    //       if (titlesArray.indexOf(bookTitle) == -1) {
+    //         // Insert the unique title.
+    //         titlesArray.push(bookTitle);
+    //         // Insert the unique book object.
+    //         uniqueArray.push(results[i]);
+    //       }
+    //     }
+
+    //     // Check that the book object has an image to display.
+    //     const booksList = uniqueArray.filter((b) => (
+    //       b.imageLinks !== undefined &&
+    //       b.authors !== undefined
+    //     ))
+
+    //     // Update the search screen state.
+    //     this.setState((state) => ({
+    //       // Iterate through the final books list to display to the user.
+    //       searchedBooks: booksList.map(function(res) {
+    //         // Put the current book out of its current shelf, if it has any assigned.
+    //         res.shelf = 'none';
+    //         // Iterate through our library.
+    //         state.books.map(function(b) {
+    //           // Check if the current book title is already there.
+    //           if (res.title === b.title) {
+    //             // Assign the equivalent shelf.
+    //             res.shelf = b.shelf;
+    //           }
+    //           // After the shelf has been checked for correspondence between the query
+    //           // list and the library, return the current book item in the query list.
+    //           return res;
+    //         })
+
+    //         // Return the book in the query list.
+    //         return res;
+    //       })
+    //     }))
+    //   // If there are no results from the query, assign an empty array to the state.
+    //   } else {
+    //     this.setState({ searchedBooks: [] })
+    //   }
+
+    //   console.log(this.state)
+    // })
+
+
+
 
 
   }
@@ -165,8 +240,8 @@ class BooksApp extends React.Component {
         <Route path="/search" render={({ history }) => (
           <SearchBook
             searchedBooks={this.state.searchedBooks}
-            onSearchAPI={(book) => {
-              this.searchBook(book)
+            onSearchAPI={(titles) => {
+              this.searchBook(titles)
               console.log(this.state)
               // history.push('/')
             }}
