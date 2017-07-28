@@ -6,7 +6,7 @@ class SearchBook extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			value: ''
+			query: ''
 		};
 
 		this.handleChange = this.handleChange.bind(this);
@@ -16,16 +16,22 @@ class SearchBook extends Component {
 
 	handleSubmit(event) {
 		event.preventDefault();
-		console.log(this.state.value);
+		console.log(this.state.query);
 		console.log(this.props);
 
 		if (this.props.onSearchAPI) {
-			this.props.onSearchAPI(this.state.value);
+			// Trim off any extra spaces around the query string.
+			// This method makes strings like 'King  ' or '  King  '
+			// be the same as 'King', that is the exact value the
+			// API wants to return a result for the query 'King'.
+			this.props.onSearchAPI(this.state.query.trim());
 		}
 	}
 
 	handleChange(event) {
-		this.setState({value: event.target.value});
+		this.setState({
+			query: event.target.value
+		});
 	}
 
 	// Call the `deleteScreen` props to empty the array that stores the results
@@ -63,7 +69,12 @@ class SearchBook extends Component {
 	              However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
 	              you don't find a specific author or title. Every search is limited by search terms.
 	            */}
-	            <input type="text" value={this.state.value} placeholder="Search by title or author" onChange={this.handleChange} />
+	            <input
+	            	className="search-books-input"
+	            	type="text" value={this.state.query}
+	            	placeholder="Search by title or author"
+	            	value={this.state.query}
+	            	onChange={this.handleChange} />
 	           </div>
           </form>
         </div>
