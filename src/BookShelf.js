@@ -31,7 +31,7 @@ class BookShelf extends Component {
         </div>
         <div className="open-search">
           <Link
-            to="/add"
+            to="/search"
             className="add-book"
             onClick={this.emptyScreen}
           >Add a book</Link>

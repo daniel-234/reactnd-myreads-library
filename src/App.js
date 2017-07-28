@@ -162,7 +162,7 @@ class BooksApp extends React.Component {
             />
           </div>
         )} />
-        <Route path="/add" render={({ history }) => (
+        <Route path="/search" render={({ history }) => (
           <SearchBook
             searchedBooks={this.state.searchedBooks}
             onSearchAPI={(book) => {
