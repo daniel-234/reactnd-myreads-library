@@ -8,16 +8,16 @@ The three shelves are:
 
 Each book has a control that lets a user select the shelf for that book. A book will move to a different shelf if a user selects it from its control.
 The main page also has a link to search new books. Books are retrieved from a backend server based on the user text input query and displayed on the page. A book can be added to the library by selecting the shelf it should move to from its control.
-The backend server only accept a particular set of search terms, that can be found in [SEARCH_TERMS.md](SEARCH_TERMS.md).
+The backend server only accepts a particular set of search terms, that can be found in [SEARCH_TERMS.md](SEARCH_TERMS.md).
 
 ## Getting started
 
-To launch the application (clone this repo and) download it locally, then install it with the command ```npm install``` and launch it with ```npm launch```.
-The Front-End server on your local machine should be accessible on `localhost: 3000`.
+To launch the application, (clone this repo and) download it locally, then install it with the command ```npm install``` and launch it with ```npm launch```.
+The Front-End server on your local machine should be accessible on *localhost: 3000*.
 
 ## Backend Server
 
-To simplify your development process, we've provided a backend server for you to develop against. The provided file [`BooksAPI.js`](src/BooksAPI.js) contains the methods you will need to perform necessary operations on the backend:
+A file was provided by the Udacity team for the backend server: [`BooksAPI.js`](src/BooksAPI.js). It contains the methods needed to perform necessary operations on the backend:
 
 ### `getAll()`
 * Returns a Promise which resolves to a JSON object containing a collection of book objects.
@@ -41,11 +41,17 @@ The backend API uses a fixed set of cached search results and is limited to a pa
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app). You can find more information on how to perform common tasks [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
 
-## Contributing
+## Author
 
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
+* **Daniele Erbì** - [daniel-234](https://github.com/daniel-234)
 
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+## Information about the starter code
+
+The starter code for this project for _all_ Udacity students can be found at [Udacity Github repository - MyReads project starter](https://github.com/udacity/reactnd-project-myreads-starter). Head there to see where this application comes from.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
 
 ## Acknowledgements
 
