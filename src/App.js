@@ -38,9 +38,8 @@ class BooksApp extends React.Component {
     }))
   }
 
+  // Insert the given book `queryBook` in the library, assigning it the given shelf.
   insertInLibrary(shelf, queryBook) {
-    console.log(shelf);
-    console.log(queryBook);
     // Control variable set to false if the book is not yet in the
     // library (default value); true otherwise.
     let inLibrary = false;
@@ -54,173 +53,85 @@ class BooksApp extends React.Component {
 
     // Check if the book is not yet in the library.
     if (inLibrary == false) {
-      console.log(queryBook);
       // Update the API and insert `queryBook` in the library.
       BooksAPI.update(queryBook, shelf).then(
         // Pass the Promise a request to the API to get the updated books collection.
         BooksAPI.getAll().then((books) => {
-          console.log(books);
           // Give the state books array the result returned by the API.
           this.setState({ books });
         })
       )
-      console.log(this.state.books);
     }
-
-    console.log(this.state);
-
-    console.log(inLibrary);
   }
 
   // Display the search results returned from the query by the user.
-  searchBook(searchedBooks) {
-    console.log(searchedBooks);
-
-    if (searchedBooks) {
-      console.log('done');
-      BooksAPI.search(searchedBooks, 20).then((results) => {
-      console.log(results);
-      console.log('A');
-
-      // Check if the query is not empty.
-      if (results.length > 0) {
-        // Array to get rid of duplicate items from the query.
-        const uniqueArray = [];
-        // Array to store the titles of the unique items.
-        const titlesArray = [];
-        // Loop through the array resulting from querying the API.
-        for (let i = 0; i < results.length; i++) {
-          // Store the current book title.
-          let bookTitle = results[i].title;
-          // Check if the same title is not yet stored in the titles array.
-          if (titlesArray.indexOf(bookTitle) == -1) {
-            // Insert the unique title.
-            titlesArray.push(bookTitle);
-            // Insert the unique book object.
-            uniqueArray.push(results[i]);
+  searchBook(searchTerm) {
+    // Check if there is a search term.
+    if (searchTerm) {
+      // If a search term is given, query the database passing that term in.
+      BooksAPI.search(searchTerm, 20).then((results) => {
+        // Check if the JSON object returned by the promise is not empty.
+        if (results.length > 0) {
+          // Array to get rid of duplicate items from the query.
+          const uniqueArray = [];
+          // Array to store the titles of the unique items.
+          const titlesArray = [];
+          // Loop through the array resulting from querying the API.
+          for (let i = 0; i < results.length; i++) {
+            // Store the current book title.
+            let bookTitle = results[i].title;
+            // Check if the same title is not yet stored in the titles array.
+            if (titlesArray.indexOf(bookTitle) == -1) {
+              // Insert the unique title.
+              titlesArray.push(bookTitle);
+              // Insert the unique book object.
+              uniqueArray.push(results[i]);
+            }
           }
-        }
 
-        // Check that the book object has an image to display.
-        const booksList = uniqueArray.filter((b) => (
-          b.imageLinks !== undefined &&
-          b.authors !== undefined
-        ))
+          // Check that the book object has an image and authors to display.
+          const booksList = uniqueArray.filter((b) => (
+            b.imageLinks !== undefined &&
+            b.authors !== undefined
+          ))
 
-        // Update the search screen state.
-        this.setState((state) => ({
-          // Iterate through the final books list to display to the user.
-          searchedBooks: booksList.map(function(res) {
-            // Put the current book out of its current shelf, if it has any assigned.
-            res.shelf = 'none';
-            // Iterate through our library.
-            state.books.map(function(b) {
-              // Check if the current book title is already there.
-              if (res.title === b.title) {
-                // Assign the equivalent shelf.
-                res.shelf = b.shelf;
-              }
-              // After the shelf has been checked for correspondence between the query
-              // list and the library, return the current book item in the query list.
+          // Update the search screen state.
+          this.setState((state) => ({
+            // Iterate through the final books list to display to the user.
+            searchedBooks: booksList.map(function(res) {
+              // Put the current book out of its current shelf, if it has any assigned.
+              res.shelf = 'none';
+              // Iterate through our library.
+              state.books.map(function(b) {
+                // Check if the current book title is already there.
+                if (res.title === b.title) {
+                  // Assign it shelf it already has in the library.
+                  res.shelf = b.shelf;
+                }
+                // After the shelf has been checked for correspondence between the query
+                // list and the library, return the current book item in the query list.
+                return res;
+              })
+
+              // Return the book in the query list.
               return res;
             })
-
-            // Return the book in the query list.
-            return res;
-          })
-        }))
-      // If there are no results from the query, assign an empty array to the state.
-      } else {
-        this.setState({ searchedBooks: [] })
-      }
-
-      console.log(this.state)
-    })
+          }))
+        // If theJSON object returned by the promise is empty, assign an empty array to the state.
+        } else {
+          this.setState({ searchedBooks: [] })
+        }
+      })
+    // If there is not a search term or if the user has deleted it, assign an empty array to the
+    // searchedBooks state and display nothing in the search screen.
     } else {
-      console.log('no');
       this.setState({ searchedBooks: [] })
     }
-
-
-
-
-
-    // BooksAPI.search(searchedBooks, 20).then((results) => {
-    //   console.log(results);
-    //   console.log('A');
-
-    //   // Check if the query is not empty.
-    //   if (results.length > 0) {
-    //     // Array to get rid of duplicate items from the query.
-    //     const uniqueArray = [];
-    //     // Array to store the titles of the unique items.
-    //     const titlesArray = [];
-    //     // Loop through the array resulting from querying the API.
-    //     for (let i = 0; i < results.length; i++) {
-    //       // Store the current book title.
-    //       let bookTitle = results[i].title;
-    //       // Check if the same title is not yet stored in the titles array.
-    //       if (titlesArray.indexOf(bookTitle) == -1) {
-    //         // Insert the unique title.
-    //         titlesArray.push(bookTitle);
-    //         // Insert the unique book object.
-    //         uniqueArray.push(results[i]);
-    //       }
-    //     }
-
-    //     // Check that the book object has an image to display.
-    //     const booksList = uniqueArray.filter((b) => (
-    //       b.imageLinks !== undefined &&
-    //       b.authors !== undefined
-    //     ))
-
-    //     // Update the search screen state.
-    //     this.setState((state) => ({
-    //       // Iterate through the final books list to display to the user.
-    //       searchedBooks: booksList.map(function(res) {
-    //         // Put the current book out of its current shelf, if it has any assigned.
-    //         res.shelf = 'none';
-    //         // Iterate through our library.
-    //         state.books.map(function(b) {
-    //           // Check if the current book title is already there.
-    //           if (res.title === b.title) {
-    //             // Assign the equivalent shelf.
-    //             res.shelf = b.shelf;
-    //           }
-    //           // After the shelf has been checked for correspondence between the query
-    //           // list and the library, return the current book item in the query list.
-    //           return res;
-    //         })
-
-    //         // Return the book in the query list.
-    //         return res;
-    //       })
-    //     }))
-    //   // If there are no results from the query, assign an empty array to the state.
-    //   } else {
-    //     this.setState({ searchedBooks: [] })
-    //   }
-
-    //   console.log(this.state)
-    // })
-
-
-
-
-
   }
-
-  // Empty the query results.
-  // emptyQueryArray() {
-  //   this.setState({
-  //     searchedBooks: []
-  //   })
-  // }
 
   // Lifecycle Event that fetches the data from the API.
   componentDidMount() {
     BooksAPI.getAll().then((books) => {
-      console.log(books);
       this.setState({ books });
     })
   }
@@ -240,21 +151,13 @@ class BooksApp extends React.Component {
         <Route path="/search" render={({ history }) => (
           <SearchBook
             searchedBooks={this.state.searchedBooks}
-            onSearchAPI={(titles) => {
-              this.searchBook(titles)
-              console.log(this.state)
-              // history.push('/')
+            onSearchAPI={(searchString) => {
+              this.searchBook(searchString)
             }}
-            // deleteScreen={this.emptyQueryArray}
             onMoveToShelf={(s, b) => {
               this.insertInLibrary(s, b)
               history.push('/')
-              // console.log(this.state)
-            }
-
-              // history.push('/'),
-              // console.log(history.location.state)
-            }
+            }}
           />
         )} />
       </div>
