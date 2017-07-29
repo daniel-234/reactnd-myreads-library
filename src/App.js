@@ -170,17 +170,17 @@ class BooksApp extends React.Component {
             />
           </div>
         )} />
+        {/*
+          Pass the `searchedBooks` array to the child Component SearchBook if there
+          is a valid query. Pass the empty array if the query string value is emtpy.
+          This is a hack needed to prevent the search screen from displaying results
+          after a user had deleted a previously typed query string and only happened
+          when the typing and deleting were too fast.
+          This is probably due to the API being queried that isn't able to respond to
+          a fast typing and to a subsequent fast stream of requests.
+        */}
         <Route path="/search" render={({ history }) => (
           <SearchBook
-            {/*
-              Pass the `searchedBooks` array to the child Component SearchBook if there
-              is a valid query. Pass the empty array if the query string value is emtpy.
-              This is a hack needed to prevent the search screen from displaying results
-              after a user had deleted a previously typed query string and only happened
-              when the typing and deleting were too fast.
-              This is probably due to the API being queried that isn't able to respond to
-              a fast typing and to a subsequent fast stream of requests.
-            */}
             searchedBooks={this.state.queryValue !== '' ? this.state.searchedBooks : []}
             onSearchAPI={(searchString) => {
               this.searchBook(searchString)
