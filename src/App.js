@@ -53,7 +53,7 @@ class BooksApp extends React.Component {
     ))
 
     // Check if the book is not yet in the library.
-    if (inLibrary == false) {
+    if (inLibrary === false) {
       // Update the API and insert `queryBook` in the library.
       BooksAPI.update(queryBook, shelf).then(
         // Pass the Promise a request to the API to get the updated books collection.
@@ -89,7 +89,7 @@ class BooksApp extends React.Component {
             // Store the current book title.
             let bookTitle = results[i].title;
             // Check if the same title is not yet stored in the titles array.
-            if (titlesArray.indexOf(bookTitle) == -1) {
+            if (titlesArray.indexOf(bookTitle) === -1) {
               // Insert the unique title.
               titlesArray.push(bookTitle);
               // Insert the unique book object.

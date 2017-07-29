@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
-import Book from './Book.js'
 import Shelf from './Shelf'
-import SearchBook from './SearchBook.js'
 import { Link } from 'react-router-dom'
 
 // The BookShelf Component renders our bookshelf on the page. There are
@@ -10,7 +8,6 @@ class BookShelf extends Component {
   // Call the `onMoveBook` in its props.
   handleShelf = (s, book) => {
     this.props.onMoveABook(s, book);
-    console.log(this.props);
   }
 
   // Call the `deleteScreen` props to empty the array that stores the results
