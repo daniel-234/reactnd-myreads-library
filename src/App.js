@@ -3,6 +3,7 @@ import BookShelf from './BookShelf'
 import SearchBook from './SearchBook'
 import { Route } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
+import sortBy from 'sort-by'
 import './App.css'
 
 class BooksApp extends React.Component {
@@ -138,6 +139,8 @@ class BooksApp extends React.Component {
 
   // Render screen based on state.
   render() {
+    // Sort books by title.
+    this.state.books.sort(sortBy('title'))
     return (
       <div className="app">
         <Route exact path="/" render={() => (

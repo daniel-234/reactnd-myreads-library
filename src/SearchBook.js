@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Book from './Book.js'
 import { Link } from 'react-router-dom'
+import sortBy from 'sort-by'
 
 class SearchBook extends Component {
 	constructor(props) {
@@ -45,6 +46,11 @@ class SearchBook extends Component {
   }
 
 	render() {
+		let showingSearchBooks
+		showingSearchBooks = this.props.searchedBooks
+
+		showingSearchBooks.sort(sortBy('title'))
+
 		return (
 			<div className="search-books">
         <div className="search-books-bar">
