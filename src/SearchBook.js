@@ -33,11 +33,17 @@ class SearchBook extends Component {
 		// at [Search Terms](https://github.com/daniel-234/
 		// reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md) .
 		this.props.onSearchAPI(query.trim());
+
+		// Clear the search screen if query is the empty screen.
+		if (query === '') {
+			this.clearSearchPage();
+		}
 	}
 
-	// Assign the query in state an empty string and clean the screen.
-	clearQuery = () => {
-		this.setState({ query: '' });
+	// Call function `onClearScreen()` in parent Component to
+	// clear the search results page.
+	clearSearchPage = () => {
+		this.props.onClearScreen();
 	}
 
 	// Insert book in the library at shelf s.
@@ -47,8 +53,11 @@ class SearchBook extends Component {
 
 	render() {
 		let showingSearchBooks
+		// Assign the searched books stored in the BooksApp Component state to
+		// a new array variable which we'll then sort.
 		showingSearchBooks = this.props.searchedBooks
 
+		// Sort the books returned by the database in order by book title.
 		showingSearchBooks.sort(sortBy('title'))
 
 		return (
@@ -81,7 +90,7 @@ class SearchBook extends Component {
           	{/*
 							If the API returns a list of books, place them in the page.
           	*/}
-          	{this.props.searchedBooks.length > 0 && this.props.searchedBooks.map((book) => (
+          	{showingSearchBooks.length > 0 && showingSearchBooks.map((book) => (
               <li key={book.id}>
                 <Book book={book} onMove={this.handleBooks} />
               </li>

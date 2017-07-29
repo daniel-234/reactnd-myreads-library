@@ -11,13 +11,13 @@ class BooksApp extends React.Component {
     // Array to store the books in our library.
     books: [],
     // Array to store the books retrieved from the API query by a user.
-    searchedBooks: []
+    searchedBooks: [],
+    queryValue: ''
   }
 
   // Move the given book to shelf s when invoked by a user action
   // on the `select` button in given book.
   moveToAnotherShelf = (s, book) => {
-    console.log(this.state);
     // Change the books property of the App state to reflect the change of
     // a shelf where book is in. This will trigger a re-render of the Component.
     this.setState((state) => ({
@@ -67,11 +67,18 @@ class BooksApp extends React.Component {
 
   // Display the search results returned from the query by the user.
   searchBook(searchTerm) {
-    // Check if there is a search term.
-    if (searchTerm) {
+    // Assign the query string to `queryValue`.
+    this.setState({
+      queryValue: searchTerm
+    })
+
+    // Check if the string query has a value different from the empty string.
+    if (searchTerm !== '') {
       // If a search term is given, query the database passing that term in.
       BooksAPI.search(searchTerm, 20).then((results) => {
-        // Check if the JSON object returned by the promise is not empty.
+        // Check if the JSON object returned by the Promise is not empty.
+        // Then perform all the operations needed to display the books list
+        // returned from querying the database.
         if (results.length > 0) {
           // Array to get rid of duplicate items from the query.
           const uniqueArray = [];
@@ -113,7 +120,6 @@ class BooksApp extends React.Component {
                 // list and the library, return the current book item in the query list.
                 return res;
               })
-
               // Return the book in the query list.
               return res;
             })
@@ -137,10 +143,23 @@ class BooksApp extends React.Component {
     })
   }
 
+  // Clear the search results page, assigning an empty value to both
+  // the `searchedBooks` array and the `queryValue` string in state.
+  clearSearchResults = () => {
+    this.setState((state) => ({
+      searchedBooks: []
+    }))
+
+    this.setState({
+      queryValue: ''
+    })
+  }
+
   // Render screen based on state.
   render() {
-    // Sort books by title.
+    // Sort books by book title.
     this.state.books.sort(sortBy('title'))
+
     return (
       <div className="app">
         <Route exact path="/" render={() => (
@@ -153,7 +172,16 @@ class BooksApp extends React.Component {
         )} />
         <Route path="/search" render={({ history }) => (
           <SearchBook
-            searchedBooks={this.state.searchedBooks}
+            {/*
+              Pass the `searchedBooks` array to the child Component SearchBook if there
+              is a valid query. Pass the empty array if the query string value is emtpy.
+              This is a hack needed to prevent the search screen from displaying results
+              after a user had deleted a previously typed query string and only happened
+              when the typing and deleting were too fast.
+              This is probably due to the API being queried that isn't able to respond to
+              a fast typing and to a subsequent fast stream of requests.
+            */}
+            searchedBooks={this.state.queryValue !== '' ? this.state.searchedBooks : []}
             onSearchAPI={(searchString) => {
               this.searchBook(searchString)
             }}
@@ -161,6 +189,7 @@ class BooksApp extends React.Component {
               this.insertInLibrary(s, b)
               history.push('/')
             }}
+            onClearScreen={this.clearSearchResults}
           />
         )} />
       </div>

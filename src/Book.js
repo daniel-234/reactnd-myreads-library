@@ -59,7 +59,11 @@ class SelectList extends Component {
   // Call the `onChangeShelf` function in props, passing the value of
   // the event target and the current book as arguments.
   handleChange(event) {
-    this.props.onChangeShelf(event.target.value, this.props.book);
+    // Only perform the action if the value of the event target is
+    // different from 'moveTo'.
+    if (event.target.value !== 'moveTo') {
+      this.props.onChangeShelf(event.target.value, this.props.book);
+    }
   }
 
   render() {
@@ -68,7 +72,7 @@ class SelectList extends Component {
       // a `value` attribute on the root `select` tag.
       // Reference 'https://facebook.github.io/react/docs/forms.html'.
       <select value={this.props.book.shelf} onChange={this.handleChange} >
-        <option value="none">Move to...</option>
+        <option value="moveTo">Move to...</option>
         <option value="currentlyReading">Currently Reading</option>
         <option value="wantToRead">Want to Read</option>
         <option value="read">Read</option>
