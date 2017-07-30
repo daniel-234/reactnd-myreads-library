@@ -40,25 +40,20 @@ class BooksApp extends React.Component {
   }
 
   // Insert the given book `queryBook` in the library, assigning it the given shelf.
+  // If the book is already in the library and the user selects a different shelf on it,
+  // it will move to that one.
   insertInLibrary(shelf, queryBook) {
-    // Control variable set to false if the book is not yet in the
-    // library (default value); true otherwise.
-    let inLibrary = false;
-    // Loop over the books array.
-    this.state.books.map((b) => (
-      // Change the value of the sentinel variable if the library is
-      // already stored in the library.
-      (b.title === queryBook.title) ?
-        inLibrary = true : inLibrary
-    ))
-
-    // Check if the book is not yet in the library.
-    if (inLibrary === false) {
-      // Update the API and insert `queryBook` in the library.
+    // Store the current shelf the given book is on.
+    let oldShelf = queryBook.shelf;
+    // Check if the current book shelf is different from the one passed
+    // by the user selection.
+    if (oldShelf !== shelf) {
+      // Update the API and insert `queryBook` in the library at the given shelf.
       BooksAPI.update(queryBook, shelf).then(
         // Pass the Promise a request to the API to get the updated books collection.
         BooksAPI.getAll().then((books) => {
-          // Give the state books array the result returned by the API.
+          // As the API returns the JSON object containing the collection of books
+          // stored in our library, pass it to the state books array.
           this.setState({ books });
         })
       )
@@ -113,7 +108,7 @@ class BooksApp extends React.Component {
               state.books.map(function(b) {
                 // Check if the current book title is already there.
                 if (res.title === b.title) {
-                  // Assign it shelf it already has in the library.
+                  // Assign it the shelf it already has in the library.
                   res.shelf = b.shelf;
                 }
                 // After the shelf has been checked for correspondence between the query
