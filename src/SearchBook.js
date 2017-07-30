@@ -63,10 +63,16 @@ class SearchBook extends Component {
 		return (
 			<div className="search-books">
         <div className="search-books-bar">
+        	{/*
+            Add an onCLick event to clear the search page screen as a user is
+            taken back to the main page.
+            A new action to add a book by the user is supposed to take him/her
+            to a clear search page.
+          */}
           <Link
           	to="/"
           	className="close-search"
-          	onClick={this.emptyScreen}
+          	onClick={this.clearSearchPage}
           >Close</Link>
         	<div className="search-books-input-wrapper">
             {/*
